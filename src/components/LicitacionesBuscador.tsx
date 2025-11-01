@@ -18,7 +18,8 @@ import {
   Eye,
   X,
   Calendar,
-  DollarSign
+  DollarSign,
+  GitCompare
 } from "lucide-react";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { Calendar as CalendarComponent } from "./ui/calendar";
@@ -226,7 +227,11 @@ const tipos = ["Todos", "LE", "LP", "LR", "LQ"];
 const estados = ["Todos", "abierta", "cerrada", "en_evaluacion", "adjudicada"];
 const categorias = ["Todas", "Infraestructura", "Salud", "Tecnología", "Consultoría"];
 
-export default function LicitacionesBuscador() {
+type LicitacionesBuscadorProps = {
+  onOpenComparador?: () => void;
+};
+
+export default function LicitacionesBuscador({ onOpenComparador }: LicitacionesBuscadorProps) {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedRegion, setSelectedRegion] = useState("Todas");
   const [selectedTipo, setSelectedTipo] = useState("Todos");
@@ -416,6 +421,12 @@ export default function LicitacionesBuscador() {
             <Download className="w-4 h-4 mr-2" />
             Exportar
           </Button>
+          {onOpenComparador && (
+            <Button variant="outline" onClick={onOpenComparador}>
+              <GitCompare className="w-4 h-4 mr-2" />
+              Comparar
+            </Button>
+          )}
         </div>
       </div>
 
